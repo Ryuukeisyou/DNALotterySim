@@ -1,0 +1,223 @@
+﻿<Window x:Class="DNALotterySim.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DNALotterySim"
+        mc:Ignorable="d"
+        Title="DNALotterySim" Height="702" Width="900">
+    <Grid>
+        <TabControl Margin="10" TabStripPlacement="Left">
+            <TabItem Header="超级玩家20191017" Height="40">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="官方公布的抽奖几率" Margin="0,0,10,10"/>
+                        <DataGrid x:Name="DG_CJWJ" AutoGenerateColumns="False" RowHeight="20" Height="167" VerticalAlignment="Top" >
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Gold" >
+                                            <Setter Property="Foreground" Value="Orange" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Orange" >
+                                            <Setter Property="Foreground" Value="OrangeRed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Purple" >
+                                            <Setter Property="Foreground" Value="Purple" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Style.Setters>
+                                    </Style.Setters>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="道具" Binding="{Binding Item.Name, Mode=OneWay}" IsReadOnly="True" MinWidth="150"/>
+                                <DataGridTextColumn Header="单价(钻石)" Binding="{Binding Item.Value, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="数量" Binding="{Binding Count, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="总价(钻石)" Binding="{Binding Value, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="几率" Binding="{Binding Rate, Mode=OneWay, StringFormat=P2}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="期望" Binding="{Binding Expect, Mode=OneWay, StringFormat=F2}" IsReadOnly="True" MinWidth="80"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="25" VerticalAlignment="Top">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="0,0,20,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <TextBlock Text="点券:"/>
+                            <TextBlock Text="{Binding CJWJ_Point}"/>
+                            <TextBlock Text="钻石:"/>
+                            <TextBlock Text="{Binding CJWJ_Sum}"/>
+                            <TextBlock Text="比例:"/>
+                            <TextBlock Text="{Binding CJWJ_Ratio}"/>
+                        </StackPanel>
+                        <TextBlock Text="——————模拟抽奖——————" Margin="0,10,10,10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="40" VerticalAlignment="Top">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="MinWidth" Value="150"/>
+                                    <Setter Property="Margin" Value="0,0,20,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Button x:Name="BT_CJWJ_Roll1" Content="抽1次" Click="BT_CJWJ_Roll1_Click"/>
+                            <Button x:Name="BT_CJWJ_Roll10" Content="抽10次" Click="BT_CJWJ_Roll10_Click"/>
+                            <Button x:Name="BT_CJWJ_Roll100" Content="抽100次" Click="BT_CJWJ_Roll100_Click"/>
+                            <Button x:Name="BT_CJWJ_Clear" Content="清空记录" Click="BT_CJWJ_Clear_Click"/>
+                        </StackPanel>
+                        <DataGrid x:Name="DG_CJWJ_Temp" ItemsSource="{Binding CJWJ_Prizes_Temp}" AutoGenerateColumns="False" CanUserSortColumns="False" Margin="0,10,0,0" VerticalAlignment="Bottom" Height="290">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Gold" >
+                                            <Setter Property="Foreground" Value="Orange" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Orange" >
+                                            <Setter Property="Foreground" Value="OrangeRed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Purple" >
+                                            <Setter Property="Foreground" Value="Purple" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Style.Setters>
+                                    </Style.Setters>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="道具" Binding="{Binding Item.Name, Mode=OneWay}" IsReadOnly="True" MinWidth="150"/>
+                                <DataGridTextColumn Header="单价(钻石)" Binding="{Binding Item.Value, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="数量" Binding="{Binding Count, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="总价(钻石)" Binding="{Binding Value, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="几率" Binding="{Binding Rate, Mode=OneWay, StringFormat=P2}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="期望" Binding="{Binding Expect, Mode=OneWay, StringFormat=F2}" IsReadOnly="True" MinWidth="80"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="25" VerticalAlignment="Bottom">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="0,0,20,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <TextBlock Text="点券:"/>
+                            <TextBlock Text="{Binding CJWJ_Point_Temp, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="钻石:"/>
+                            <TextBlock Text="{Binding CJWJ_Sum_Temp, NotifyOnSourceUpdated=True}" />
+                            <TextBlock Text="比例:"/>
+                            <TextBlock Text="{Binding CJWJ_Ratio_Temp, NotifyOnSourceUpdated=True}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="星云宝藏二期20191107" Height="40">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="官方公布的抽奖几率" Margin="0,0,10,10"/>
+                        <DataGrid x:Name="DG_XYBZ2" AutoGenerateColumns="False" RowHeight="20" Height="167" VerticalAlignment="Top" >
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Gold" >
+                                            <Setter Property="Foreground" Value="Orange" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Orange" >
+                                            <Setter Property="Foreground" Value="OrangeRed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Purple" >
+                                            <Setter Property="Foreground" Value="Purple" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Style.Setters>
+                                    </Style.Setters>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="道具" Binding="{Binding Item.Name, Mode=OneWay}" IsReadOnly="True" MinWidth="150"/>
+                                <DataGridTextColumn Header="单价(钻石)" Binding="{Binding Item.Value, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="数量" Binding="{Binding Count, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="总价(钻石)" Binding="{Binding Value, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="几率" Binding="{Binding Rate, Mode=OneWay, StringFormat=P2}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="期望" Binding="{Binding Expect, Mode=OneWay, StringFormat=F2}" IsReadOnly="True" MinWidth="80"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="25" VerticalAlignment="Top">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="0,0,20,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <TextBlock Text="点券:"/>
+                            <TextBlock Text="{Binding XYBZ2_Point}"/>
+                            <TextBlock Text="钻石:"/>
+                            <TextBlock Text="{Binding XYBZ2_Sum}"/>
+                            <TextBlock Text="比例:"/>
+                            <TextBlock Text="{Binding XYBZ2_Ratio}"/>
+                        </StackPanel>
+                        <TextBlock Text="——————模拟抽奖——————" Margin="0,10,10,10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="40" VerticalAlignment="Top">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="MinWidth" Value="150"/>
+                                    <Setter Property="Margin" Value="0,0,20,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Button x:Name="BT_XYBZ2_Roll1" Content="抽1次" Click="BT_XYBZ2_Roll1_Click"/>
+                            <Button x:Name="BT_XYBZ2_Roll10" Content="抽10次" Click="BT_XYBZ2_Roll10_Click"/>
+                            <Button x:Name="BT_XYBZ2_Roll100" Content="抽100次" Click="BT_XYBZ2_Roll100_Click"/>
+                            <Button x:Name="BT_XYBZ2_Clear" Content="清空记录" Click="BT_XYBZ2_Clear_Click"/>
+                        </StackPanel>
+                        <DataGrid x:Name="DG_XYBZ2_Temp" ItemsSource="{Binding XYBZ2_Prizes_Temp}" AutoGenerateColumns="False" CanUserSortColumns="False" Margin="0,10,0,0" VerticalAlignment="Bottom" Height="290">
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Gold" >
+                                            <Setter Property="Foreground" Value="Orange" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Orange" >
+                                            <Setter Property="Foreground" Value="OrangeRed" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Item.Color}" Value="Purple" >
+                                            <Setter Property="Foreground" Value="Purple" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Style.Setters>
+                                    </Style.Setters>
+                                </Style>
+                            </DataGrid.CellStyle>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="道具" Binding="{Binding Item.Name, Mode=OneWay}" IsReadOnly="True" MinWidth="150"/>
+                                <DataGridTextColumn Header="单价(钻石)" Binding="{Binding Item.Value, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="数量" Binding="{Binding Count, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="总价(钻石)" Binding="{Binding Value, Mode=OneWay}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="几率" Binding="{Binding Rate, Mode=OneWay, StringFormat=P2}" IsReadOnly="True" MinWidth="80"/>
+                                <DataGridTextColumn Header="期望" Binding="{Binding Expect, Mode=OneWay, StringFormat=F2}" IsReadOnly="True" MinWidth="80"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="25" VerticalAlignment="Bottom">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="0,0,20,0"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <TextBlock Text="点券:"/>
+                            <TextBlock Text="{Binding XYBZ2_Point_Temp, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="钻石:"/>
+                            <TextBlock Text="{Binding XYBZ2_Sum_Temp, NotifyOnSourceUpdated=True}" />
+                            <TextBlock Text="比例:"/>
+                            <TextBlock Text="{Binding XYBZ2_Ratio_Temp, NotifyOnSourceUpdated=True}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Upcomming" Height="40">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="关于" Height="40">
+                <Grid Background="#FFE5E5E5">
+                    <TextBlock Text="制作: 手Q一区 星芒守护 Bilkis" HorizontalAlignment="Left" Height="17" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="490"/>
+                    <TextBlock Text="讨论: 非酋养老院 714209210（qq群）" HorizontalAlignment="Left" Height="25" Margin="10,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="490"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

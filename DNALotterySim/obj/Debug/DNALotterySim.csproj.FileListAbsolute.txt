@@ -1,0 +1,14 @@
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\bin\Debug\DNALotterySim.exe.config
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\bin\Debug\DNALotterySim.exe
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\bin\Debug\DNALotterySim.pdb
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\App.g.cs
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\DNALotterySim_MarkupCompile.cache
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\DNALotterySim_MarkupCompile.lref
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\DNALotterySim.g.resources
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\DNALotterySim.Properties.Resources.resources
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\DNALotterySim.csproj.GenerateResource.cache
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\DNALotterySim.exe
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\DNALotterySim.pdb
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\MainWindow.g.cs
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\MainWindow.baml
+C:\Users\adminitrator\source\repos\ryukeisyo\DNALotterySim\obj\Debug\DNALotterySim.csprojAssemblyReference.cache
